@@ -20,7 +20,7 @@ public:
 		correo = _c;
 	}
 	//-----------------------------------------------------------------------------------------------------------------
-void guardarEnArchivo() {
+	void guardarEnArchivo() const {
 		ofstream archivo("club.txt ", ios::app);
 		if (archivo.is_open()) {
 			archivo << nombre << " " << edad << " " << correo << endl;
