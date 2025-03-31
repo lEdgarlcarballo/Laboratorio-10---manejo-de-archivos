@@ -48,7 +48,7 @@ static void leerDesdeArchivo() {
 	}
 }
 //-----------------------------------------------------------------------------------------------------------------
-static void actualizarMiembros(string nombreBuscar,int nuevaEdad, string correoNuevo) {
+static void actualizarMiembro(string nombreBuscar,int nuevaEdad, string correoNuevo) {
 	ifstream archivo("club.txt");
 	ofstream archivoTemp("temp.txt");
 	string n, c;
@@ -118,3 +118,58 @@ static void eliminarMiembro(string nombreBuscar) {
 }
 };
 
+
+int main() {
+	int opcion;
+	do {
+		cout << "\n--- Menu del Club ---\n";
+		cout << "1. Agregar nuevo miembro\n";
+		cout << "2. Mostrar miembros\n";
+		cout << "3. Actualizar miembro\n";
+		cout << "4. Eliminar miembro\n";
+		cout << "5. Salir\n";
+		cout << "Seleccione una opcion: ";
+		cin >> opcion;
+		if (opcion == 1) {
+			string nombre, correo;
+			int edad;
+			cout << "Ingrese nombre: ";
+			cin >> nombre;
+			cout << "Ingrese edad: ";
+			cin >> edad;
+			cout << "Ingrese correo: ";
+			cin >> correo;
+			MiembroClub nuevo(nombre, edad, correo);
+			nuevo.guardarEnArchivo();
+		}
+		else if (opcion == 2) {
+			MiembroClub::leerDesdeArchivo();
+		}
+		else if (opcion == 3) {
+			string nombre;
+			int edad;
+			string correo;
+			cout << "Ingrese nombre del miembro a actualizar: ";
+			cin >> nombre;
+			cout << "Ingrese nueva edad: ";
+			cin >> edad;
+			cout << "Ingrese nuevo correo: ";
+			cin >> correo;
+			MiembroClub::actualizarMiembro(nombre, edad, correo);
+		}
+		else if (opcion == 4) {
+			string nombre;
+			cout << "Ingrese nombre del miembro a eliminar: ";
+			cin >> nombre;
+			MiembroClub::eliminarMiembro(nombre);
+		}
+		else if (opcion == 5) {
+			cout << "Saliendo...\n";
+		}
+		else {
+			cout << "Opcion invalida. Intente de nuevo.\n";
+		}
+	} while (opcion != 5);
+
+	return 0;
+}
